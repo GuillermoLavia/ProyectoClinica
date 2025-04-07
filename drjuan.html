@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="estilos.css"> <!-- Incluyendo el CSS externo -->
+    <title>Información del Médico - Clínica Salud y Bienestar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background: #007BFF;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        main {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .doctor-info {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 10px 0;
+            width: 60%; /* Ajusta el ancho según sea necesario */
+        }
+
+        .doctor-photo {
+            width: 30%; /* Ajusta el ancho según sea necesario */
+            margin-left: 20px; /* Espacio entre la foto y la información */
+        }
+
+        .doctor-photo img {
+            width: 100%; /* La imagen se ajusta al contenedor */
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .available-appointments {
+            margin-top: 20px;
+        }
+
+        .appointment {
+            background: #e9ecef;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Clínica Salud y Bienestar</h1>
+        <p>Información del Médico</p>
+    </header>
+    <main>
+        <div class="doctor-info">
+            <h2>Dr. Juan Pérez</h2>
+            <p><strong>Especialidad:</strong> Cardiología</p>
+            <p><strong>Descripción:</strong> El Dr. Juan Pérez es un cardiólogo con más de 10 años de experiencia en el tratamiento de enfermedades del corazón.</p>
+            <div class="available-appointments">
+                <h3>Turnos Disponibles</h3>
+                <div class="appointment">Lunes 10:00 - 11:00</div>
+                <div class="appointment">Miércoles 14:00 - 15:00</div>
+                <div class="appointment">Viernes 16:00 - 17:00</div>
+            </div>
+        </div>
+        <div class="doctor-photo">
+            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAMAAzAMBIgACEQEDEQH/xAAcAAEAAgIDAQAAAAAAAAAAAAAAAQIGBwMFCAT/xAA+EAACAQMBBQMJBgUDBQAAAAAAAQIDBBEFBhIhMUEHUYETFyJUYXGRktEUIzJCcqEzUmKxwRUk0jVDgsLD/8QAGQEBAAMBAQAAAAAAAAAAAAAAAAMEBQIB/8QAHhEBAQACAwEBAQEAAAAAAAAAAAECEQMEEiFBUTH/2gAMAwEAAhEDEQA/AN4h8gzjby8AHLLwXXIiKwWAAAAAAIbK8f5g+bAFkySEiQAAAAFZSASeCIccsRWeJcAAAAAAMrkmXIjoATLFUiwESWSIxwWAAAAAAAAAENBIkjKAkHSbRbU6Ns5QVTVb2EJyWYUoreqT90Vx8eXe0a61Ttkm5NaRpUVHPCV1Pi17o8vieXKR1MbW4AaPpdsWtKf3mn2M49VmUX4cTOdje0fSto7hWVWnOxv3+ClUknGp+mXf7HhnnqFwsZsV3OLLZB05FwJAAAAAAABGCQAAAAAAAAAAAAAARnia97Sdvo6BGWmaRKM9TnH05vjG3T6tdZdyMn2x1yns7s9d6lPEpwju0oN436j4RXxPM9zcV7u5qXV1UdS4qyc6k3+aT5sjzy18SYYb+l1cV7y5qXV3WqV7io8zq1ZZlLx/wURHTJ9Nnp97fv8A2VpXr+2FNtfHkQ2/1Y1fxwKO9nHImlVlRqQqUJyhUpyUo1FzyuTLV6dS3r1KFWE6VWlLdqQksOL7mjjeHyWPZ3B4zDS+0zamxmpVr6F7De4wuKUeXsccY/c2jsX2i6ZtHUhZ10rLUZfhozlwqfofX3czz6SpSg1OEnGUWpRlF4cWuTT6P2ncyscXCV62TyiTD+zPap7S7PxdzLN/avydx/U8cJeKMvJpdoLNXSQAevAAAAAAAAAAhsCQVy+7xLAAAAAAGp+3u6atNFssvFStVrNJ89yKj/8AQ1JaWte8uadtbUpVK1R7sIR6myu3qTesaLDpG2rv4yh9D4OyaxjO51DUJx/hRjSpy6rPGX/r+5W5br6tcU3NO02b2AsrKnTuNYSu7prPkm806fh+Z+/h7DM4RjCMYwhGMYrCUVjASwsElDLK5X6v44zGMS222Qjra+2WO7T1CEcNclWXRP2rozVNehVtbidvc0p060HiUJrDR6DOq13Z/Ttdo7l/QzNLEa0Hicfc/qSYcuvlR58W/saOnHdbi01JcGmuRUzvbbZCvbQo6haSdeKioXT3MNY4KphdMfixyfHHHhi+saDqGj16dO7pJxq8aVWk96FRd6f+GWJlKr5YWMi7ItWenbY0LdvFHUIOhKPfJJyi/wBpLxPQSR5Y0itCx1qwuY3DU6F1Sm92GVwmm1nPdk9TpljjVuT/AFIAJEYAAABDeAJBRcZFwBXGeZYrgCCyCRIAAAACH7ANRduVk6mo6Hcfk8lXhJJpPnTa/u/gcPZjn7BqClj0LhQ9H9Kfx4ozXbzRbPW7a2t71SUqdSVSnUhLdcZYxn9/7GK9nlhPTdKu6FV+mryopPvxiK/sUuxnPsXevjflZSACkvAAAdGn15nW63o9HVNGr6fhQUoNU5Jfw5Y4NHZBc/2wdS6+vLNtIXNOjc2s7ShBQuKb3ZrGHSa4Sy/eenUaU2d2etr3VNcr3dOVS3je1IqDljfeW2+HTj8TdFCflKNOp/NFM0eLKW2Mznxs1XKACdAAACG8FHmT9hMk2/YWSwBEVgsAAAAAAAAAAAIA6faOnmnRqdE3Fv3mP2NqrOlUhv72/WnVbxj8Ty0ZncUYXFKVOpHMZLijGbigratKkuSeEUOzhZfS/wBTOWeXGACouAAPQHcunUBLPu6gfFY6erNVYwnvutcTqYxjjPoZ1SjuU4x7lg6jStPjJU7utxlzgscjuVyNDr4WTdZvZzmV1PxIALKsAAAAAAAAAAAAAAAAAAAdPrtvmMa8Fy4SO4KVIKpBwmsp9DjkwmePmu+PO4ZTKMSB9F5bSt6zi08flfej5zKsuN1WvjZlNwAB49DltaDuK8aUevP3HF1zzwd/pVo6FLyk195Pn7ES8PH7y0h5uWceO/199KKhBRisJLCLEIk1GUAAAAAAAAAAAAVnLHDqAnLHBcyY8iiTfM5EAAAAAACu8g+Y4e8DgvaEK1vPfXJNp9xidCvCtBYfp9UZfXa+z1HLhHdecvHAwh2TTzSk1hdeDRR7Um4vdS3Vfb/fuIclFZk91dcnyxhdpYVWKRP2aU3mvVcvYuRU1Fze3a6BKndXdX0U40kmn7WZIkdFs7GnTrVowSWYrC7zvHJJZNLrSTCVmdm28lS3hFYvLfd0IeZMvFYROgSAAAAAFXJZ6ky5cCoFk8klV7CwEN8CkU3zOQAAAAAPi1jVLPRtPq32o1o0beksyk+LfckurfcB9jeDq9U2j0bSf+o6la28ukZ1Fl+BprartL1bWqkqOnb+nWT4KMJLysl/VJcvcvi+ZhMnmbnKTlN85t5bfvA31d9qWytu2qd1XuJ/y0bebXzNJfuYxrPa/W9Knomlwjlfxrue9h/oj/yNVjoB3WtbV67ruY6jqNWVJ/8Aap/dxXgv85NnbI6v/rOiULics14LyVb9S6+K4/E0uvbyMq7PdX/0/WY21Wf+3vfRT/r6P/HwIOxh6wWOvyec/ra458B7+a4YOo2r1aOjaJXuc/eyXk6K75vl8OfgZ2E9XTSysxm2Abca/XuNokrG4qUoWOacJ0puPpfmfDw+B2OjdpmvWFFfa61HUIQf4biO7Nr2Tj196Zgj3nlzeZN8+rINbHHzNMfPL1la3PpfbBo9bC1GwvLSWOM44qw8GsSfymQWXaLspeNKGqwp5eF5eEqXH/ySPPA8Tpy9V0Lqhc0lVtqsK0HylCSaOXJ5f0jWNQ0Wsq+k3dW3afGEX6L98eTNxbB9otDX6kdO1OEbbUsfdyT+7r9+O6XsfPpnjgM/BGSQIayiPYWAEJEgAAAAAAEPPDBoDtN2nqa/rtS1oSzp9lN06cU+FSS4Sn8cpG59stRqaTstql9ReK1G2m6T7ptYj+7R5ohGMKcaS5RWE8gS3zxz6leYYAAAAWjJp5i3FrDTXNNcmipD5DWz923bszqq1jRbe84eVa3KyXSa4P48/EwDtG1b7brSsqcs0LJOPDlKo/xPw4L4ny7KbRz0CN7BpyjWpZpx/lqLkzHqkpznKdSTlKbcnJ822+JW4+HzyWrPJz3LjkV5gAsqwAAJTw8otCUqclUoycJxlvKSfGL7yhMXuvLA9C9nW0r2k2fhVuJL7bbS8jcY6tYxL3NYfxXQys0b2L3zobW1rVcKV5atNZ/PB70ceDqG8gAAAAAAAAAAA6HbjSbnXdmbvTLGdOnXrunuyqNpYjOMny9iZq7zRa761Y/GX0N3gDSPmj17rdWPzS+hHmi171qx+aX0N3gDSHmi171qx+aX0Hmi171qx+aX0N3kMDSPmi171qx+aX0C7Itd9bsfml9DdsXvLJYDSD7Iteb43Vj80voSuyPXlw+1WOP1S+hu4AaQ80evetWPzS+g80WvetWPzS+hu8AaQ80WvetWPzS+g80WvetWPzS+hu/IA0h5otd9bsfml9A+yLXnzu7H5pfQ3eANVbF9nOr6DtPY6lcXVrOjRdTyihJ70k4Siune0/A2qAAAIfACQUTy+HIuAKssVAjGC6KpFgAAAAEMA2Ub3g228FlHAEpEgAAAAKyfQsQ+YFcLryJjw4ZyOZKQEgAAAADONybeBKTzhExQEwWPEsAB/9k=" alt="Foto de Dr. Juan Pérez"> <!-- Imagen de ejemplo -->
+        </div>
+    </main>
+    <footer>
+        <p style="text-align: center; padding: 10px; background: #333; color: white; position: relative; bottom: 0; width: 100%;">Clínica Salud y Bienestar © 2025</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,263 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Clínica Salud y Bienestar - Registro</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Asegura que el footer esté siempre abajo */
+        }
+
+        header {
+            background: #007BFF;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        .main-container {
+            display: flex; /* Contenedor Flexbox para nav y main */
+            flex: 1; /* Ocupa el espacio vertical restante */
+        }
+
+        nav {
+            width: 150px;
+            background: #333;
+            color: white;
+            padding: 15px;
+            margin-right: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+        }
+
+        nav a:hover {
+            background: #575757;
+        }
+
+        main {
+            padding: 20px;
+            flex: 1; /* El main ocupa el espacio restante horizontal */
+        }
+
+        i {
+            margin-right: 20px;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 100%; /* Ancho completo en pantallas pequeñas */
+            max-width: 600px; /* Ancho máximo en pantallas grandes */
+            margin: 20px auto; /* Centrado horizontal y margen superior/inferior */
+        }
+
+        .form-container {
+            padding: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block; /* Para que ocupen todo el ancho */
+            margin-bottom: 5px;
+            font-weight: bold; /* Etiquetas más legibles */
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: border-color 0.3s;
+            box-sizing: border-box; /* Importante para que el padding no aumente el ancho */
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus,
+        input[type="email"]:focus,
+        select:focus {
+            border-color: #306987;
+            outline: none; /* Elimina el borde de enfoque predeterminado */
+            box-shadow: 0 0 5px rgba(48, 105, 135, 0.5); /* Agrega un resplandor sutil */
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #306987;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #245d7e;
+        }
+
+        .toggle-link {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .toggle-link a {
+            color: #306987;
+            text-decoration: none;
+        }
+
+        /* Estilos para los errores */
+        input.error {
+            border-color: red;
+        }
+
+        /* Media query para pantallas más pequeñas */
+        @media (max-width: 600px) {
+            .main-container {
+                flex-direction: column; /* Apila nav y main verticalmente */
+            }
+
+            nav {
+                width: 100%;
+                margin-right: 0;
+                text-align: center;
+            }
+
+            nav a {
+                display: inline-block;
+                margin: 0 10px;
+            }
+
+            main {
+                padding: 10px;
+            }
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: auto; /* Empuja el footer hacia abajo */
+        }
+    </style>
+    <script>
+        function validateForm(event) {
+            const password = document.getElementById('password-reg');
+            const passwordConfirm = document.getElementById('password-confirm');
+            let isValid = true;
+
+            // Limpia los estilos de error
+            password.classList.remove('error');
+            passwordConfirm.classList.remove('error');
+
+            // Verifica si las contraseñas coinciden
+            if (password.value !== passwordConfirm.value) {
+                password.classList.add('error');
+                passwordConfirm.classList.add('error');
+                isValid = false;
+                alert("Las contraseñas no coinciden. Por favor, corrígelas.");
+            }
+
+            // Si no es válido, evita el envío del formulario
+            if (!isValid) {
+                event.preventDefault();
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Clínica Salud y Bienestar</h1>
+        <p>Bienvenido a Clínica Salud y Bienestar, donde su salud es nuestra prioridad.</p>
+    </header>
+    <div class="main-container">
+        <nav>
+            <a href="index.html"><i class="fa-solid fa-bars"></i>Inicio</a>
+            <a href="loginpaciente.html"><i class="fas fa-user-injured"></i> Pacientes</a>
+            <a href="#medicos"><i class="fas fa-user-md"></i> Médicos</a>
+            <a href="#servicios"><i class="fa-solid fa-microscope"></i> Análisis</a>
+            <a href="#turnos"><i class="fa-regular fa-pen-to-square"></i>Turnos</a>
+            <a href="#contacto"><i class="fas fa-envelope"></i> Contacto</a>
+        </nav>
+        <main>
+            <div class="container">
+                <div class="form-container">
+                    <h2>Registro de Paciente</h2>
+                    <form id="register-form" action="reg_user.php" method="post" onsubmit="validateForm(event)">
+                        <div class="form-group">
+                            <label for="username-reg">Apellido y Nombre:</label>
+                            <input type="text" id="username-reg" name="username" placeholder="Ej: Juan Pérez" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="DNI">DNI:</label>
+                            <input type="number" minlength="8" maxlength="8" id="DNI-reg" name="dni" placeholder="Ej: 12345678" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="direccion">Dirección:</label>
+                            <input type="text" id="direccion" name="direccion" placeholder="Ej: Av. Siempre Viva 742" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono">Teléfono:</label>
+                            <input type="text" id="telefono" name="telefono" placeholder="Ej: 011-1234-5678" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="obrasocial">Obra Social:</label>
+                            <select id="obrasocial" name="obrasocial" required>
+                                <option value="">Seleccionar</option>
+                                <option value="IASEP">IASEP</option>
+                                <option value="OSDE">OSDE</option>
+                                <option value="PFA">PFA</option>
+                                <option value="Otra">Otra</option>
+                                <option value="No Tiene">No Tiene</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="email-reg">Correo Electrónico:</label>
+                            <input type="email" id="email-reg" name="email" placeholder="Ej: ejemplo@correo.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password-reg">Contraseña:</label>
+                            <input type="password" id="password-reg" name="password" placeholder="Mínimo 8 caracteres" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password-confirm">Repetir Contraseña:</label>
+                            <input type="password" id="password-confirm" name="password-confirm" placeholder="Las Contraseñas deben ser iguales" required>
+                        </div>
+                        <button type="submit">Registrarse</button>
+                        <div class="toggle-link">
+                            <p>¿Ya tienes cuenta? <a href="loginpaciente.html">Inicia sesión aquí</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+    <footer>
+        <p>&copy; 2025 Clínica Salud y Bienestar</p>
+    </footer>
+</body>
+</html>
+

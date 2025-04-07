@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <title>Perfil del Paciente</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background: #007BFF;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav {
+            
+            float: left;
+            background: #333;
+            color: white;
+            height: 100vh;/* largo de la pagina */
+            padding: 15px;
+            
+            margin-right: 20px;   
+        } 
+        nav a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+        }
+        nav a:hover {
+            background: #575757;
+        }
+        
+        main {
+            margin-left: 20px;
+            padding: 20px;
+            transition: margin-left 0.3s ease;
+        }
+        i{
+            margin-right: 20px; /* espacio icono text */
+        }
+       
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Perfil del Paciente</h1>
+        <div class="text-align mb-4">
+            <img src="data:image/png;base64,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" alt="Foto de Perfil" class="img-fluid rounded-circle" style="width: 150px; height: 150px;">
+        </div>
+        <nav>
+            <a href="index.html"><i class="fa-solid fa-bars"></i>Inicio</a>
+            <a href="loginpaciente.html"><i class="fas fa-user-injured"></i> Pacientes</a>
+            <a href="#medicos"><i class="fas fa-user-md"></i> Médicos</a>
+            <a href="#servicios"><i class="fa-solid fa-microscope"></i> Análisis</a>
+            <a href="#turnos"><i class="fa-regular fa-pen-to-square"></i>Turnos</a>
+            <a href="#contacto"><i class="fas fa-envelope"></i> Contacto</a>
+            
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <h2 class="text-center">Datos Personales</h2>
+           
+            <div id="datos-paciente"></div>
+            
+        </div>
+        
+            <div class="container bg-white rounded shadow">
+                <h2 class="text-center">Acciones Disponibles</h2>
+                <div class="text-center">
+                    <a href="#" class="btn btn-primary btn-lg m-2">Ver Información</a>
+                    <a href="https://web.whatsapp.com/" class="btn btn-success btn-lg m-2">Consultar Online</a>
+                    <a href="#" class="btn btn-warning btn-lg m-2">Solicitar Turno</a>
+                    <a href="#" class="btn btn-info btn-lg m-2">Ayuda</a>
+                </div>
+            </div>
+      
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Tu Empresa. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Obtener los datos del paciente
+        // Obtener los datos del paciente
+        fetch('cocperfilpac.php')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error en la solicitud: ' + response.status);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Datos recibidos:', data);
+        const datosPacienteDiv = document.getElementById('datos-paciente');
+        if (data.error) {
+            datosPacienteDiv.innerHTML = `<p>${data.error}</p>`;
+        } else {
+            datosPacienteDiv.innerHTML = `
+                <p><strong>DNI:</strong> ${data.dni}</p>
+                <p><strong>Nombre y Apellido:</strong> ${data.apellidoynombre}</p>
+                <p><strong>Teléfono:</strong> ${data.telefono}</p>
+                <p><strong>Email:</strong> ${data.email}</p>
+                <p><strong>Obra Social:</strong> ${data.obrasocial}</p>
+                <p><strong>Dirección:</strong> ${data.direccion}</p>
+            `;
+        }
+    })
+    .catch(error => {
+        console.error('Error al procesar los datos:', error);
+        document.getElementById('datos-paciente').innerHTML = `<p>Ocurrió un error: ${error.message}</p>`;
+    });
+    </script>
+</body>
+</html>
+

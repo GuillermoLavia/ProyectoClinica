@@ -1,0 +1,21 @@
+{
+    "name": "guille/proyectofinal",
+    "description": "Mi proyecto final",
+    "require": {
+        "phpmailer/phpmailer": "^6.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Guille\\Proyectofinal\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Guille",
+            "email": "guille@example.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "type": "project",
+    "license": "MIT"
+}

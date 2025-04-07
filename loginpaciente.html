@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="estilo.css"> 
+    <title>Clínica Salud y Bienestar</title>
+
+   
+</head>
+<body>
+    <header>
+        <h1>Clínica Salud y Bienestar</h1>
+        <p>Bienvenido a Clínica Salud y Bienestar, donde su salud es nuestra prioridad.</p>
+    </header>
+    <nav>
+        <a href="index.html"><i class="fa-solid fa-bars"></i>Inicio</a>
+        <a href="loginpaciente.html"><i class="fas fa-user-injured"></i> Pacientes</a>
+        <a href="medicos.html"><i class="fas fa-user-md"></i> Médicos</a>
+        <a href="#servicios"><i class="fa-solid fa-microscope"></i> Análisis</a>
+        <a href="#turnos"><i class="fa-regular fa-pen-to-square"></i>Turnos</a>
+        <a href="#contacto"><i class="fas fa-envelope"></i> Contacto</a>
+        
+    </nav>
+    <main>
+        <center>
+             <div class="container">  
+            <div class="header">  
+                <h2>Bienvenido</h2>  
+                <p>Login Paciente</p>  
+            </div>  
+            <div class="form-container">  
+                <form id="login-form" action="loginpaciente.php" method="post">   
+                    <div class="form-group">  
+                        <label for="dni">DNI:</label>  
+                        <input type="text" id="dni" name="dni" required>  
+                    </div>  
+                    <div class="form-group">  
+                        <label for="pass">Contraseña:</label>  
+                        <input type="password" id="pass" name="pass" required>  
+                    </div>  
+                    <button type="submit">Iniciar Sesión</button>  
+                    <div class="link">  
+                        <p>¿No tienes cuenta? <a href="formpaciente.html">Regístrate aquí</a></p>  
+                    </div>  
+                </form>
+            </div>  
+        </div>  
+        </center>
+       
+    </main>
+    <footer>
+        
+    </footer>
+</body>
+</html>
