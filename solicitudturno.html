@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Solicitud de Turnos Médicos</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6; /* Espaciado entre líneas */
+        }
+        header {
+            background: #007BFF;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        /* Barra de navegación */
+        nav {
+            width: 200px;
+            float: left;
+            background: #343a40;
+            color: white;
+            height: 100vh;
+            padding: 20px;
+            margin-right: 20px;
+            box-sizing: border-box;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 12px;
+            border-bottom: 1px solid #555;
+            margin-bottom: 5px; /* Espacio entre enlaces */
+        }
+        nav a:hover {
+            background: #575757;
+        }
+        /* Contenido principal */
+        main {
+            margin-left: 220px;
+            padding: 20px;
+            transition: margin-left 0.3s ease;
+        }
+        i {
+            margin-right: 10px;
+        }
+        /* Tarjeta de médico */
+        .medico-card {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        /* Formulario de médico */
+        #medico-form {
+            background-color: #fff;
+            padding: 30px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        #medico-form h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #007BFF;
+        }
+        #medico-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        #medico-form input[type="text"],
+        #medico-form input[type="password"],
+        #medico-form select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        #medico-form button[type="submit"],
+        #medico-form button[type="button"] {
+            background-color: #007BFF;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        #medico-form button[type="submit"]:hover,
+        #medico-form button[type="button"]:hover {
+            background-color: #0056b3;
+        }
+        /* Horarios */
+        .horario-input {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            border: 1px solid #eee;
+            padding: 15px;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+        .horario-input label {
+            margin-right: 5px;
+            width: auto;
+            font-weight: normal;
+            margin-bottom: 0;
+        }
+        .horario-input select {
+            width: calc(30% - 10px);
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            margin-bottom: 5px; /* Espacio inferior en pantallas pequeñas */
+        }
+        .horario-input input[type="time"] {
+            width: calc(20% - 10px);
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            margin-bottom: 5px; /* Espacio inferior en pantallas pequeñas */
+        }
+        .horario-input .turno-checkbox {
+            display: flex;
+            align-items: center;
+            margin-right: 10px;
+        }
+        .horario-input .turno-checkbox label {
+            margin-left: 5px;
+        }
+        .turno-container {
+            display: flex;
+            width: calc(40% - 10px);
+            align-items: center;
+            margin-bottom: 5px; /* Espacio inferior en pantallas pequeñas */
+        }
+        .time-container {
+            display: flex;
+            width: calc(60% - 10px);
+            align-items: center;
+            margin-bottom: 5px; /* Espacio inferior en pantallas pequeñas */
+        }
+        /* Lista de médicos */
+        #medicos h2 {
+            color: #007BFF;
+            margin-bottom: 20px;
+        }
+        /* Media queries para responsiveness */
+        @media (max-width: 768px) {
+            nav {
+                width: 100%;
+                float: none;
+                height: auto;
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+            main {
+                margin-left: 0;
+            }
+            .horario-input select,
+            .horario-input input[type="time"],
+            .turno-container,
+            .time-container {
+                width: 100%; /* Ancho completo en pantallas pequeñas */
+            }
+            .horario-input {
+                flex-direction: column; /* Apilar elementos en pantallas pequeñas */
+            }
+            .horario-input label {
+                margin-bottom: 5px; /* Espacio inferior para las etiquetas */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Solicitud de Turnos Médicos</h1>
+    </header>
+    <nav>
+        <a href="index.html"><i class="fa-solid fa-bars"></i> Inicio</a>
+        <a href="loginpaciente.html"><i class="fas fa-user-injured"></i> Pacientes</a>
+        <a href="#medicos"><i class="fas fa-user-md"></i> Médicos</a>
+        <a href="#servicios"><i class="fa-solid fa-microscope"></i> Análisis</a>
+        <a href="solicitudturno.html"><i class="fa-regular fa-pen-to-square"></i> Turnos</a>
+        <a href="#contacto"><i class="fas fa-envelope"></i> Contacto</a>
+    </nav>
+    <main>
+        <center>
+        <div class="container">
+            <h2>Solicitar Turno</h2>
+            <form id="turno-form" action="procesar_turno.php" method="POST">
+             <!-- Cambios en la sección del formulario -->
+<div class="form-group">
+    <label for="especialidad">Especialidad:</label>
+    <select class="form-control" id="especialidad" name="especialidad">
+        <option value="">Seleccione una especialidad</option>
+    </select>
+</div>
+<div class="form-group">
+    <label for="medico">Médico:</label>
+    <select class="form-control" id="medico" name="medico">
+        <option value="">Seleccione un médico</option>
+    </select>
+    <input type="hidden" id="medico_id_hidden" name="medico_id">
+</div>
+<div class="form-group">
+    <label for="fecha">Fecha:</label>
+    <input type="date" class="form-control" id="fecha" name="fecha">
+</div>
+<div class="form-group">
+    <label for="hora">Turno:</label>
+    <select class="form-control" id="hora" name="hora">
+        <option value="">Seleccione una hora</option>
+    </select>
+</div>
+                <div class="form-group">
+                    <label for="motivo">Motivo de la consulta:</label>
+                    <textarea class="form-control" id="motivo" name="motivo" rows="3" placeholder="Describa brevemente el motivo de la consulta" maxlength="60"></textarea>
+                    <div id="char-count" style="margin-top: 5px;">Caracteres restantes: 60</div>
+                </div>
+                <input type="hidden" id="paciente_id" name="paciente_id" value="123"> <!-- Cambia este valor -->
+                <button type="submit" class="btn btn-primary">Solicitar Turno</button>
+            </form>
+        </div>
+        </center>
+    </main>
+    <footer>
+        <p>&copy; 2025 Tu Empresa. Todos los derechos reservados.</p>
+    </footer>
+    <script>
+        const especialidadSelect = document.getElementById("especialidad");
+        const medicoSelect = document.getElementById("medico");
+        const medicoIdHidden = document.getElementById("medico_id_hidden");
+        const fechaInput = document.getElementById("fecha");
+        const horaSelect = document.getElementById("hora");
+        let medicosData = {};
+        
+        function obtenerDiaSemana(fecha) {
+            const dias = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
+            const dia = new Date(fecha).getDay();
+            return dias[dia];
+        }
+        
+        function generarHorasEntre(inicio, fin) {
+            const horas = [];
+            let [hIni, mIni] = inicio.split(':').map(Number);
+            let [hFin, mFin] = fin.split(':').map(Number);
+        
+            while (hIni < hFin || (hIni === hFin && mIni < mFin)) {
+                let h = hIni.toString().padStart(2, '0');
+                let m = mIni.toString().padStart(2, '0');
+                horas.push(`${h}:${m}`);
+                mIni += 30;
+                if (mIni >= 60) {
+                    mIni = 0;
+                    hIni++;
+                }
+            }
+            return horas;
+        }
+        
+        function cargarMedicosHorarios() {
+            fetch('obtener_medicos_horarios.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        console.error('Error al cargar los datos:', data.error);
+                        return;
+                    }
+        
+                    medicosData = data;
+        
+                    const especialidadesUnicas = [...new Set(data.medicos.map(m => m.especialidad))];
+                    especialidadesUnicas.forEach(esp => {
+                        const option = document.createElement("option");
+                        option.value = esp;
+                        option.text = esp.charAt(0).toUpperCase() + esp.slice(1);
+                        especialidadSelect.appendChild(option);
+                    });
+        
+                    especialidadSelect.addEventListener("change", function () {
+                        const especialidadSeleccionada = this.value;
+                        medicoSelect.innerHTML = '<option value="">Seleccione un médico</option>';
+        
+                        data.medicos.forEach(medico => {
+                            if (medico.especialidad === especialidadSeleccionada) {
+                                const option = document.createElement("option");
+                                option.value = medico.id;
+                                option.text = medico.nombre;
+                                medicoSelect.add(option);
+                            }
+                        });
+        
+                        horaSelect.innerHTML = '<option value="">Seleccione una hora</option>';
+                        fechaInput.value = '';
+                    });
+        
+                    medicoSelect.addEventListener("change", function () {
+                        const medicoId = this.value;
+                        medicoIdHidden.value = medicoId;
+                        horaSelect.innerHTML = '<option value="">Seleccione una hora</option>';
+                        fechaInput.value = '';
+        
+                        fechaInput.addEventListener("change", function () {
+                            const fechaSeleccionada = this.value;
+                            const diaSemana = obtenerDiaSemana(fechaSeleccionada);
+                            horaSelect.innerHTML = '<option value="">Seleccione una hora</option>';
+        
+                            const horarios = data.horarios.filter(h =>
+                                h.medico_id == medicoId && h.dia.toLowerCase() === diaSemana
+                            );
+        
+                            if (horarios.length === 0) {
+                                const option = document.createElement("option");
+                                option.text = "No hay horarios disponibles";
+                                horaSelect.add(option);
+                                return;
+                            }
+        
+                            horarios.forEach(horario => {
+                                const turno = horario.turno.toLowerCase() === 'mañana' ? 'Mañana' : 'Tarde';
+                                const bloques = generarHorasEntre(horario.hora_inicio, horario.hora_fin);
+                                const optgroup = document.createElement("optgroup");
+                                optgroup.label = `Turno ${turno}`;
+                                bloques.forEach(hora => {
+                                    const option = document.createElement("option");
+                                    option.value = hora;
+                                    option.text = hora;
+                                    optgroup.appendChild(option);
+                                });
+                                horaSelect.appendChild(optgroup);
+                            });
+                        });
+                    });
+                })
+                .catch(error => console.error('Error al cargar los datos:', error));
+        }
+        
+        cargarMedicosHorarios();
+        </script>
+        
+        
+</body>
+</html>

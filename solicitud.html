@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Búsqueda de Paciente</title>
+</head>
+<body>
+    <div class="container">
+        <h2 class="mt-4">Buscar Paciente</h2>
+        <form id="buscar-paciente-form">
+            <div class="form-group">
+                <label for="dni">DNI del Paciente:</label>
+                <input type="text" class="form-control" id="dni" name="dni" placeholder="Ingrese el DNI" required>
+            </div>
+            <button type="button" class="btn btn-primary" id="buscar-dni-btn">Buscar</button>
+        </form>
+        <hr>
+        <div id="paciente-info" style="display: none;">
+            <h4>Información del Paciente</h4>
+            <p id="datos-paciente"></p>
+            <form id="turno-form" action="procesar_turno.php" method="POST">
+                <input type="hidden" id="paciente_id" name="paciente_id">
+                <div class="form-group">
+                    <label for="fecha">Fecha:</label>
+                    <input type="date" class="form-control" id="fecha" name="fecha" required>
+                </div>
+                <div class="form-group">
+                    <label for="hora">Hora:</label>
+                    <input type="time" class="form-control" id="hora" name="hora" required>
+                </div>
+                <div class="form-group">
+                    <label for="motivo">Motivo de la consulta:</label>
+                    <textarea class="form-control" id="motivo" name="motivo" rows="3" maxlength="250" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-success">Registrar Turno</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("buscar-dni-btn").addEventListener("click", function () {
+            const dni = document.getElementById("dni").value;
+
+            // Realizar una solicitud AJAX para buscar el paciente
+            fetch("buscar_paciente.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ dni: dni })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert(data.error); // Mostrar error si no se encuentra el paciente
+                } else {
+                    // Mostrar información del paciente y rellenar el campo oculto paciente_id
+                    document.getElementById("paciente-info").style.display = "block";
+                    document.getElementById("datos-paciente").textContent = `
+                        DNI: ${data.dni}
+                        Nombre: ${data.apellidoynombre}
+                        Teléfono: ${data.telefono}
+                        Email: ${data.email}
+                        Obra Social: ${data.obrasocial}
+                        Dirección: ${data.direccion}
+                    `;
+                    document.getElementById("paciente_id").value = data.id; // Asignar el id_paciente
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("Hubo un error al buscar el paciente.");
+            });
+        });
+    </script>
+</body>
+</html>

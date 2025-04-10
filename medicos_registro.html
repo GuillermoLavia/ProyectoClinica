@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Clínica Salud y Bienestar - Médicos</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6; /* Espaciado entre líneas */
+        }
+        header {
+            background: #007BFF;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        /* Barra de navegación */
+        nav {
+            width: 200px;
+            float: left;
+            background: #343a40;
+            color: white;
+            height: 100vh;
+            padding: 20px;
+            margin-right: 20px;
+            box-sizing: border-box;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 12px;
+            border-bottom: 1px solid #555;
+            margin-bottom: 5px; /* Espacio entre enlaces */
+        }
+        nav a:hover {
+            background: #575757;
+        }
+        /* Contenido principal */
+        main {
+            margin-left: 220px;
+            padding: 20px;
+            transition: margin-left 0.3s ease;
+        }
+        i {
+            margin-right: 10px;
+        }
+        /* Tarjeta de médico */
+        .medico-card {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        /* Formulario de médico */
+        #medico-form {
+            background-color: #fff;
+            padding: 30px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        #medico-form h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #007BFF;
+        }
+        #medico-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        #medico-form input[type="text"],
+        #medico-form input[type="password"],
+        #medico-form select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        #medico-form button[type="submit"],
+        #medico-form button[type="button"] {
+            background-color: #007BFF;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        #medico-form button[type="submit"]:hover,
+        #medico-form button[type="button"]:hover {
+            background-color: #0056b3;
+        }
+        /* Horarios */
+        .horario-input {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            border: 1px solid #eee;
+            padding: 15px;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+        .horario-input label {
+            margin-right: 5px;
+            width: auto;
+            font-weight: normal;
+            margin-bottom: 0;
+        }
+        .horario-input select {
+            width: calc(30% - 10px);
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            margin-bottom: 5px; /* Espacio inferior en pantallas pequeñas */
+        }
+        .horario-input input[type="time"] {
+            width: calc(20% - 10px);
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            margin-bottom: 5px; /* Espacio inferior en pantallas pequeñas */
+        }
+        .horario-input .turno-checkbox {
+            display: flex;
+            align-items: center;
+            margin-right: 10px;
+        }
+        .horario-input .turno-checkbox label {
+            margin-left: 5px;
+        }
+        .turno-container {
+            display: flex;
+            width: calc(40% - 10px);
+            align-items: center;
+            margin-bottom: 5px; /* Espacio inferior en pantallas pequeñas */
+        }
+        .time-container {
+            display: flex;
+            width: calc(60% - 10px);
+            align-items: center;
+            margin-bottom: 5px; /* Espacio inferior en pantallas pequeñas */
+        }
+        /* Lista de médicos */
+        #medicos h2 {
+            color: #007BFF;
+            margin-bottom: 20px;
+        }
+        /* Media queries para responsiveness */
+        @media (max-width: 768px) {
+            nav {
+                width: 100%;
+                float: none;
+                height: auto;
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+            main {
+                margin-left: 0;
+            }
+            .horario-input select,
+            .horario-input input[type="time"],
+            .turno-container,
+            .time-container {
+                width: 100%; /* Ancho completo en pantallas pequeñas */
+            }
+            .horario-input {
+                flex-direction: column; /* Apilar elementos en pantallas pequeñas */
+            }
+            .horario-input label {
+                margin-bottom: 5px; /* Espacio inferior para las etiquetas */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Clínica Salud y Bienestar</h1>
+        <p>Administración de Médicos</p>
+    </header>
+    <nav>
+        <a href="index.html"><i class="fa-solid fa-bars"></i> Inicio</a>
+        <a href="loginpaciente.html"><i class="fas fa-user-injured"></i> Pacientes</a>
+        <a href="medicos.html"><i class="fas fa-user-md"></i> Médicos</a>
+        <a href="#servicios"><i class="fa-solid fa-microscope"></i> Análisis</a>
+        <a href="#turnos"><i class="fa-regular fa-pen-to-square"></i> Turnos</a>
+        <a href="#contacto"><i class="fas fa-envelope"></i> Contacto</a>
+        <a href="medicos_registro.html"><i class="fas fa-user-plus"></i> Medicos Registrar</a>
+    </nav>
+    <main>
+        <section id="medico-form">
+            <h2>Agregar Nuevo Médico</h2>
+            <form id="medicoForm" action="guardar_medico.php" method="POST">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="apellido" name="apellido" required>
+
+                <label for="especialidad">Especialidad:</label>
+                <input type="text" id="especialidad" name="especialidad">
+
+                <label for="matricula">Matrícula:</label>
+                <input type="text" id="matricula" name="matricula" required>
+
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password" required>
+
+                <h3>Horarios Disponibles:</h3>
+                <div id="horarios-container">
+                    <div class="horario-input">
+                        <label for="diaSemana">Día de la semana:</label>
+                        <select name="horarios[0][dia_semana]">
+                            <option value="Lunes">Lunes</option>
+                            <option value="Martes">Martes</option>
+                            <option value="Miércoles">Miércoles</option>
+                            <option value="Jueves">Jueves</option>
+                            <option value="Viernes">Viernes</option>
+                            <option value="Sábado">Sábado</option>
+                            <option value="Domingo">Domingo</option>
+                        </select>
+
+                        <div class="turno-container">
+                            <div class="turno-checkbox">
+                                <input type="checkbox" id="turnoManana" name="horarios[0][turno_manana]">
+                                <label for="turnoManana">Mañana</label>
+                            </div>
+
+                            <div class="turno-checkbox">
+                                <input type="checkbox" id="turnoTarde" name="horarios[0][turno_tarde]">
+                                <label for="turnoTarde">Tarde</label>
+                            </div>
+                        </div>
+
+                        <div class="time-container">
+                            <label for="horaInicio">Inicio:</label>
+                            <input type="time" name="horarios[0][hora_inicio]">
+
+                            <label for="horaFin">Fin:</label>
+                            <input type="time" name="horarios[0][hora_fin]">
+                        </div>
+
+                        <button type="button" onclick="eliminarHorario(this)">Eliminar</button>
+                    </div>
+                </div>
+                <button type="button" onclick="agregarHorario()">Agregar Horario</button>
+
+                <button type="submit">Guardar Médico</button>
+            </form>
+        </section>
+
+        <section id="medicos">
+            <h2>Lista de Médicos</h2>
+            <!-- Aquí se insertará el contenido dinámico de los médicos -->
+        </section>
+    </main>
+    <footer>
+        <!-- Aquí podría ir información adicional o enlaces -->
+    </footer>
+    <script>
+        let horarioCounter = 1; // Contador para los horarios
+
+        function agregarHorario() {
+            const horariosContainer = document.getElementById("horarios-container");
+            const nuevoHorario = document.createElement("div");
+            nuevoHorario.classList.add("horario-input");
+
+            nuevoHorario.innerHTML = `
+                <label for="diaSemana">Día de la semana:</label>
+                <select name="horarios[${horarioCounter}][dia_semana]">
+                    <option value="Lunes">Lunes</option>
+                    <option value="Martes">Martes</option>
+                    <option value="Miércoles">Miércoles</option>
+                    <option value="Jueves">Jueves</option>
+                    <option value="Viernes">Viernes</option>
+                    <option value="Sábado">Sábado</option>
+                    <option value="Domingo">Domingo</option>
+                </select>
+
+                <div class="turno-container">
+                    <div class="turno-checkbox">
+                        <input type="checkbox" name="horarios[${horarioCounter}][turno_manana]">
+                        <label for="turnoManana">Mañana</label>
+                    </div>
+
+                    <div class="turno-checkbox">
+                        <input type="checkbox" name="horarios[${horarioCounter}][turno_tarde]">
+                        <label for="turnoTarde">Tarde</label>
+                    </div>
+                </div>
+
+                <div class="time-container">
+                    <label for="horaInicio">Inicio:</label>
+                    <input type="time" name="horarios[${horarioCounter}][hora_inicio]">
+
+                    <label for="horaFin">Fin:</label>
+                    <input type="time" name="horarios[${horarioCounter}][hora_fin]">
+                </div>
+
+                <button type="button" onclick="eliminarHorario(this)">Eliminar</button>
+            `;
+            horariosContainer.appendChild(nuevoHorario);
+            horarioCounter++;
+        }
+
+        function eliminarHorario(elemento) {
+            elemento.parentNode.remove();
+        }
+    </script>
+</body>
+</html>
