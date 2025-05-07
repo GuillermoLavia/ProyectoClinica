@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost'; // Cambia esto si tu base de datos está en otro servidor
-$db = 'clinica2025'; // Nombre de tu base de datos
+$db = 'clinica777'; // Nombre de tu base de datos
 $user = 'root'; // Tu usuario de la base de datos
 $pass = ''; // Tu contraseña de la base de datos
 

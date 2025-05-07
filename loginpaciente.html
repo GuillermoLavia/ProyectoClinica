@@ -1,57 +1,90 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="estilo.css"> 
-    <title>Clínica Salud y Bienestar</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login Paciente - Clínica Salud y Bienestar</title>
 
-   
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<body>
-    <header>
-        <h1>Clínica Salud y Bienestar</h1>
-        <p>Bienvenido a Clínica Salud y Bienestar, donde su salud es nuestra prioridad.</p>
-    </header>
-    <nav>
-        <a href="index.html"><i class="fa-solid fa-bars"></i>Inicio</a>
-        <a href="loginpaciente.html"><i class="fas fa-user-injured"></i> Pacientes</a>
-        <a href="medicos.html"><i class="fas fa-user-md"></i> Médicos</a>
-        <a href="#servicios"><i class="fa-solid fa-microscope"></i> Análisis</a>
-        <a href="#turnos"><i class="fa-regular fa-pen-to-square"></i>Turnos</a>
-        <a href="#contacto"><i class="fas fa-envelope"></i> Contacto</a>
-        
-    </nav>
-    <main>
-        <center>
-             <div class="container">  
-            <div class="header">  
-                <h2>Bienvenido</h2>  
-                <p>Login Paciente</p>  
-            </div>  
-            <div class="form-container">  
-                <form id="login-form" action="loginpaciente.php" method="post">   
-                    <div class="form-group">  
-                        <label for="dni">DNI:</label>  
-                        <input type="text" id="dni" name="dni" required>  
-                    </div>  
-                    <div class="form-group">  
-                        <label for="pass">Contraseña:</label>  
-                        <input type="password" id="pass" name="pass" required>  
-                    </div>  
-                    <button type="submit">Iniciar Sesión</button>  
-                    <div class="link">  
-                        <p>¿No tienes cuenta? <a href="formpaciente.html">Regístrate aquí</a></p>  
-                    </div>  
-                </form>
-            </div>  
-        </div>  
-        </center>
-       
-    </main>
-    <footer>
-        
-    </footer>
+
+<body class="d-flex flex-column min-vh-100">
+
+  <!-- Encabezado -->
+  <header class="bg-primary text-white text-center py-3">
+    <h1>Clínica Salud y Bienestar</h1>
+    <p>Bienvenido a Clínica Salud y Bienestar, donde su salud es nuestra prioridad.</p>
+  </header>
+
+  <!-- Barra de navegación -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">Inicio</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="loginpaciente.html"><i class="fas fa-user-injured"></i> Pacientes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="medicos.php"><i class="fas fa-user-md"></i> Médicos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#servicios"><i class="fas fa-microscope"></i> Análisis</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#turnos"><i class="far fa-pen-to-square"></i> Turnos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contacto"><i class="fas fa-envelope"></i> Contacto</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-center bg-primary text-white">
+                    <h2>Bienvenido</h2>
+                    <p>Inicio de sesión</p>
+                </div>
+                <div class="card-body">
+                    <form id="login-form" action="cocperfilpac.php" method="post">
+                        <div class="mb-3">
+                            <label for="dni" class="form-label">DNI:</label>
+                            <input type="text" id="dni" name="dni" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="pass" class="form-label">Contraseña:</label>
+                            <input type="password" id="pass" name="pass" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Acceder</button>
+                        <div class="text-center mt-3">
+                            <p>¿No tienes cuenta? <a href="formpaciente.html">Regístrate aquí</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+  <!-- Pie de página -->
+  <footer class="bg-dark text-white text-center py-3 mt-auto">
+    <p>&copy; 2025 Clínica Salud y Bienestar</p>
+  </footer>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

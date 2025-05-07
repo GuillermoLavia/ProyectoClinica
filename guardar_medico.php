@@ -1,109 +1,54 @@
 <?php
 require_once 'conexion.php';
 
-// Función para enviar el modal
-function sendModal($message, $type = 'success') {
-    $modal_id = 'myModal'; // ID del modal
-    $modal_html = "
-    <div class='modal' id='$modal_id'>
-        <div class='modal-content'>
-            <span class='close' onclick='closeModal(\"$modal_id\")'>&times;</span>
-            <p>$message</p>
-        </div>
-    </div>
-    <script>
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-            window.location.href = 'medicos_registro.html'; // Redirigir
-        }
-
-        // Mostrar el modal automáticamente al cargar la página
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('$modal_id').style.display = 'block';
-        });
-    </script>
-    <style>
-        /* Estilos básicos para el modal */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-        }
-
-        /* Modal Content/Box */
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto; /* 15% from the top and centered */
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%; /* Could be more or less, depending on screen size */
-        }
-
-        /* The Close Button */
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-    </style>
-    ";
-    echo $modal_html;
+if (!isset($pdo)) {
+    die('Error: No se pudo establecer la conexión con la base de datos.');
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Recoger los datos del formulario
-    $nombre = $_POST['nombre'];
-    $apellido = $_POST['apellido'];
-    $especialidad = $_POST['especialidad'];
-    $matricula = $_POST['matricula'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hash de la contraseña
+// Verificar que todos los datos necesarios estén presentes
+if (!isset($_POST['nombre'], $_POST['apellido'], $_POST['especialidad'], $_POST['password'], $_POST['usuario'])) {
+    die('Error: Faltan datos en el formulario.');
+}
 
-    try {
-        // Insertar los datos del médico
-        $sql_medico = "INSERT INTO medicos (nombre, apellido, especialidad, matricula, password) VALUES (?, ?, ?, ?, ?)";
-        $stmt_medico = $pdo->prepare($sql_medico);
-        $stmt_medico->execute([$nombre, $apellido, $especialidad, $matricula, $password]);
+$nombre = $_POST['nombre'] . ' ' . $_POST['apellido'];
+$especialidad = $_POST['especialidad'];
+$password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Cifrado seguro
+$usuario = $_POST['usuario'];
 
-        $medico_id = $pdo->lastInsertId(); // Obtener el ID del médico insertado
+$correo = $_POST['nombre'] . ' ' . $_POST['apellido'];; // Valor por defecto
 
-        // Procesar los horarios
-        if (isset($_POST['horarios']) && is_array($_POST['horarios'])) {
-            foreach ($_POST['horarios'] as $horario) {
-                $dia_semana = $horario['dia_semana'];
-                $turno_manana = isset($horario['turno_manana']) ? 1 : 0;
-                $turno_tarde = isset($horario['turno_tarde']) ? 1 : 0;
-                $hora_inicio = $horario['hora_inicio'];
-                $hora_fin = $horario['hora_fin'];
+try {
+    // Insertar en la tabla usuarios (usando 'contraseña' en lugar de 'password')
+    $sql_usuario = "INSERT INTO usuarios (usuario, nombre, contraseña, correo, rol) VALUES (?, ?, ?, ?, ?)";
+    $stmt_usuario = $pdo->prepare($sql_usuario);
+    $stmt_usuario->execute([$usuario, $nombre, $password, $correo, 'medico']);
 
-                // Insertar los horarios del médico
-                $sql_horario = "INSERT INTO horarios_medicos (medico_id, dia_semana, turno_manana, turno_tarde, hora_inicio, hora_fin) VALUES (?, ?, ?, ?, ?, ?)";
-                $stmt_horario = $pdo->prepare($sql_horario);
-                $stmt_horario->execute([$medico_id, $dia_semana, $turno_manana, $turno_tarde, $hora_inicio, $hora_fin]);
-            }
-        }
+    $usuario_id = $pdo->lastInsertId(); // ID del nuevo usuario
 
-        sendModal('Médico guardado con éxito.', 'success');
+    // Insertar en la tabla medicos (sólo usuario_id y id_especialidad)
+    $sql_medico = "INSERT INTO medicos (usuario_id, id_especialidad) VALUES (?, ?)";
+    $stmt_medico = $pdo->prepare($sql_medico);
+    $stmt_medico->execute([$usuario_id, $especialidad]);
 
-    } catch (PDOException $e) {
-        // Enviar mensaje de error
-        sendModal('Error al guardar el médico: ' . $e->getMessage(), 'error');
-    }
-} else {
-    // Si no es una solicitud POST, devolver un error
-    sendModal('Método no permitido.', 'error');
+    // Mensaje de éxito
+    echo "<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+          <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js'></script>
+          <script>
+              $(document).ready(function() {
+                  alert('Médico guardado con éxito.');
+                  window.location.href = 'index.html'; // Cambiar si quieres redirigir
+              });
+          </script>";
+
+} catch (PDOException $e) {
+    $error = htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8');
+    echo "<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+          <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js'></script>
+          <script>
+              $(document).ready(function() {
+                  alert('Error al guardar el médico: {$error}');
+                  window.history.back();
+              });
+          </script>";
 }
 ?>

@@ -8,14 +8,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $dni = trim($_POST['dni']);
         $password = trim($_POST['pass']); // Sanitizar la contraseña
 
-      
-
         // Validación del DNI
         if (strlen($dni) < 7 || !ctype_digit($dni)) {
             $_SESSION['error_message'] = "DNI inválido.";
             header("Location: loginpaciente.html");
             exit();
-        }
+        }   
 
         $sql = "SELECT * FROM pacientes WHERE dni = :dni";
         $stmt = $pdo->prepare($sql);
@@ -25,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($stmt->rowCount() > 0) {
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
+            // Mostrar la contraseña hasheada de la base de datos (solo para depuración)
             echo "Contraseña hasheada de la base de datos: " . $user['password'] . "<br>"; // ¡CORREGIDO!
 
             // Verificar la contraseña
@@ -35,9 +34,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     session_start(); 
                     $_SESSION['user_id'] = $user['id'];
                     $_SESSION['dni'] = $user['dni'];
+                    $_SESSION['rol'] = $user['rol']; // Guardar el rol en la sesión
                     error_log("DNI guardado en la sesión: " . $_SESSION['dni']);
 
-                    header("Location: perfilpaciente.html");
+                    // Redirigir según el rol
+                    if ($_SESSION['rol'] === 'paciente') {
+                        header("Location: perfilpaciente.html");
+                    } elseif ($_SESSION['rol'] === 'medico') {
+                        header("Location: perfil_medico.html");
+                    } else {
+                        $_SESSION['error_message'] = "Rol de usuario no reconocido.";
+                        header("Location: loginpaciente.html");
+                    }
                     exit();
                 } else {
                     // Email no verificado
